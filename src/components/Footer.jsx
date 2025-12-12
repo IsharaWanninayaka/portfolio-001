@@ -36,7 +36,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4 space-x-3">
               <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-primary to-accent">
-                <FaCode className="text-white" />
+                <img src="/logo.png" alt="Logo" className="w-15 h-15" />
               </div>
               <span className="text-xl font-bold">Portfolio</span>
             </div>

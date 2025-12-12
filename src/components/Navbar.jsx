@@ -61,7 +61,7 @@ const Navbar = () => {
           {/* Logo */}
           <a href="#home" className="flex items-center space-x-2">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-primary to-accent">
-              <FaCode className="text-white" />
+              <img src="/logo.png"></img>
             </div>
             <span className="text-xl font-bold text-dark">Portfolio</span>
           </a>
