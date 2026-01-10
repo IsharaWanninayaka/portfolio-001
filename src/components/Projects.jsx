@@ -24,7 +24,7 @@ const PROJECTS = [
     icon: <IoHardwareChipSharp />,
     tech: ["Python", "Electron.js", "React.js", "Node.js", "Sqlite"],
     github: "https://github.com/logicsimplifier/boolean_logic_solver",
-    live: "",
+    live: "https://www.youtube.com/watch?v=DBZNrmWjAZo",
     stars: 31,
     forks: 12,
     featured: true,
