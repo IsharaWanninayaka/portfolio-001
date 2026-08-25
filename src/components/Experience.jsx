@@ -8,7 +8,7 @@ import {
   FaGraduationCap,
   FaCodeBranch,
 } from "react-icons/fa";
-import { SiFlutter, SiReact, SiFirebase, SiDart, SiAndroid, SiApple } from "react-icons/si";
+import { SiFlutter } from "react-icons/si";
 
 const Experience = () => {
   const experiences = [

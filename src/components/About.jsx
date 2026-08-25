@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import {
-  FaGraduationCap,
   FaUniversity,
   FaCalendarAlt,
-  FaAward,
   FaLightbulb,
-  FaUsers,
-  FaRocket,
   FaShieldAlt,
   FaMobileAlt,
   FaBuilding,

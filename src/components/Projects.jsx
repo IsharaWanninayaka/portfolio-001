@@ -4,7 +4,6 @@ import {
   FaExternalLinkAlt,
   FaStar,
   FaCodeBranch,
-  FaMobileAlt,
   FaLayerGroup,
   FaInfoCircle,
 } from "react-icons/fa";

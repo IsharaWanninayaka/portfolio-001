@@ -4,12 +4,11 @@ import {
   FaArrowRight,
   FaCode,
   FaServer,
-  FaDatabase,
   FaMobileAlt,
   FaCheckCircle,
   FaBuilding,
 } from "react-icons/fa";
-import { SiFlutter, SiReact, SiFirebase, SiDart, SiTypescript } from "react-icons/si";
+import { SiFlutter, SiReact, SiFirebase } from "react-icons/si";
 
 const Hero = () => {
   const stats = [

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   FaReact,
   FaNodeJs,
-  FaDatabase,
   FaCloud,
   FaGitAlt,
   FaPython,
@@ -21,8 +20,6 @@ import {
   SiFirebase,
   SiDocker,
   SiKalilinux,
-  SiWireshark,
-  SiAndroid,
   SiPostgresql,
 } from "react-icons/si";
 
