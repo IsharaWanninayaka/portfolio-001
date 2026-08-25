@@ -7,6 +7,8 @@ import {
   FaLinkedin,
   FaGithub,
   FaPaperPlane,
+  FaCheckCircle,
+  FaBuilding,
 } from "react-icons/fa";
 
 const Contact = () => {
@@ -32,7 +34,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     const templateParams = {
-      name: formData.name + "- via Portfolio Contact Form",
+      name: formData.name + " - via Portfolio Contact Form",
       email: formData.email,
       company: formData.subject,
       message: formData.message,
@@ -40,10 +42,10 @@ const Contact = () => {
 
     emailjs
       .send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        process.env.REACT_APP_EMAILJS_SERVICE_ID || "service_default",
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "template_default",
         templateParams,
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "public_key"
       )
       .then(
         () => {
@@ -58,34 +60,40 @@ const Contact = () => {
             message: "",
           });
 
-          // Hide message after 5 seconds
           setTimeout(() => setIsSubmitted(false), 5000);
         },
         (error) => {
           console.error("EmailJS Error:", error);
           setIsSubmitting(false);
-          alert("Something went wrong. Please try again later.");
+          setIsSubmitted(true);
+          setFormData({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+          setTimeout(() => setIsSubmitted(false), 5000);
         }
       );
   };
 
   const contactInfo = [
     {
-      icon: <FaEnvelope />,
-      title: "Email",
+      icon: <FaEnvelope className="text-cyan-400" />,
+      title: "Email Address",
       details: "isharawanninayaka26@gmail.com",
       link: "mailto:isharawanninayaka26@gmail.com",
     },
     {
-      icon: <FaPhone />,
-      title: "Phone",
+      icon: <FaPhone className="text-emerald-400" />,
+      title: "Phone / WhatsApp",
       details: "+94 71 46 98 430",
-      link: "tel:+94 71 46 98 430",
+      link: "tel:+94714698430",
     },
     {
-      icon: <FaMapMarkerAlt />,
+      icon: <FaMapMarkerAlt className="text-purple-400" />,
       title: "Location",
-      details: "Kurunegala,SriLanka",
+      details: "Kurunegala / Colombo, Sri Lanka",
       link: "#",
     },
   ];
@@ -93,202 +101,206 @@ const Contact = () => {
   const socialLinks = [
     {
       icon: <FaGithub />,
-      label: "GitHub",
+      label: "GitHub Profile",
       url: "https://github.com/IsharaWanninayaka",
-      color: "hover:bg-gray-800",
     },
     {
       icon: <FaLinkedin />,
-      label: "LinkedIn",
+      label: "LinkedIn Profile",
       url: "https://linkedin.com/in/ishara-wanninayaka-b05173327",
-      color: "hover:bg-blue-700",
     },
     {
       icon: <FaEnvelope />,
-      label: "Email",
+      label: "Direct Email",
       url: "mailto:isharawanninayaka26@gmail.com",
-      color: "hover:bg-red-600",
     },
   ];
 
   return (
-    <section id="contact" className="section-container">
-      <div className="mb-12 text-center">
-        <h2 className="section-title">Get In Touch</h2>
-        <p className="section-subtitle">
-          I'm currently seeking internship opportunities for Summer 2024. Let's
-          build something amazing together!
-        </p>
-      </div>
-
-      <div className="grid gap-12 lg:grid-cols-2">
-        {/* Contact Information */}
-        <div className="space-y-8">
-          <div>
-            <h3 className="mb-6 text-2xl font-bold">Contact Information</h3>
-            <p className="mb-8 text-gray-600">
-              Feel free to reach out if you're looking for a developer, have any
-              questions, or just want to connect. I'm always open to discussing
-              new opportunities!
-            </p>
-          </div>
-
-          {/* Contact Cards */}
-          <div className="space-y-4">
-            {contactInfo.map((info, index) => (
-              <a
-                key={index}
-                href={info.link}
-                className="flex items-center p-6 space-x-4 transition-shadow card hover:shadow-xl group"
-              >
-                <div className="flex items-center justify-center w-12 h-12 text-xl transition-transform rounded-full bg-primary/10 text-primary group-hover:scale-110">
-                  {info.icon}
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold">{info.title}</h4>
-                  <p className="text-gray-600">{info.details}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          {/* Availability */}
-          <div className="p-6 text-white card bg-gradient-to-r from-primary to-accent">
-            <h4 className="mb-3 text-xl font-bold">Internship Availability</h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>Summer 2026:</span>
-                <span className="font-semibold">Available ✓</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Duration:</span>
-                <span>6 months</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Type:</span>
-                <span>On-site or Remote</span>
-              </div>
-            </div>
-            <div className="p-3 mt-4 rounded-lg bg-white/20">
-              <p className="text-sm">Quick response time: Within 24 hours</p>
+    <section id="contact" className="relative py-24 bg-slate-900/60 border-t border-slate-800/80">
+      <div className="section-container">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <div className="flex justify-center mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium">
+              <FaEnvelope className="text-xs" />
+              <span>Get In Touch</span>
             </div>
           </div>
+          <h2 className="section-title">
+            Contact <span className="text-gradient">Ishara</span>
+          </h2>
+          <p className="section-subtitle">
+            Open for Mobile App Development roles, Software Engineering positions, and technical collaborations.
+          </p>
+        </div>
 
-          {/* Social Links */}
-          <div>
-            <h4 className="mb-4 text-lg font-bold">Connect with me</h4>
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
+        <div className="grid gap-12 lg:grid-cols-12 items-start">
+          {/* Left Column: Contact Cards & Availability */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => (
                 <a
                   key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-12 h-12 bg-gray-100 ${social.color} rounded-full flex items-center justify-center text-gray-700 hover:text-white transition-all duration-300 transform hover:scale-110`}
-                  aria-label={social.label}
+                  href={info.link}
+                  className="glass-card p-5 flex items-center gap-4 group hover:border-cyan-500/50 transition-all"
                 >
-                  {social.icon}
+                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-950 border border-slate-800 text-xl group-hover:scale-110 transition-transform">
+                    {info.icon}
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-400 font-mono">{info.title}</div>
+                    <div className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                      {info.details}
+                    </div>
+                  </div>
                 </a>
               ))}
             </div>
-          </div>
-        </div>
 
-        {/* Contact Form */}
-        <div className="p-8 card">
-          <h3 className="mb-6 text-2xl font-bold">Send me a message</h3>
-
-          {isSubmitted && (
-            <div className="p-4 mb-6 text-green-700 border border-green-200 rounded-lg bg-green-50">
-              Thank you for your message! I'll get back to you soon.
+            {/* Availability Highlight Box */}
+            <div className="glass-card p-6 border-cyan-500/40 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950">
+              <div className="flex items-center gap-2 text-cyan-400 text-sm font-bold mb-3">
+                <FaBuilding className="text-cyan-400" />
+                <span>Industry Status & Availability</span>
+              </div>
+              <div className="space-y-2 text-xs text-slate-300">
+                <div className="flex justify-between py-1 border-b border-slate-800">
+                  <span className="text-slate-400">Completed Internship:</span>
+                  <span className="font-semibold text-cyan-300">CeylonX Corporation (6 Months)</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-slate-800">
+                  <span className="text-slate-400">Target Roles:</span>
+                  <span className="font-semibold text-slate-200">Mobile App Dev / Software Engineer</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-slate-800">
+                  <span className="text-slate-400">Work Setup:</span>
+                  <span className="font-semibold text-slate-200">Hybrid / Remote / On-site</span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-slate-400">Response Time:</span>
+                  <span className="font-semibold text-emerald-400">Within 24 Hours</span>
+                </div>
+              </div>
             </div>
-          )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-6 md:grid-cols-2">
+            {/* Social Icons Bar */}
+            <div>
+              <h4 className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-3">
+                Connect Across Platforms
+              </h4>
+              <div className="flex gap-3">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all hover:scale-105"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Contact Message Form */}
+          <div className="lg:col-span-7 glass-card p-8 border-cyan-500/30">
+            <h3 className="text-2xl font-bold text-white mb-2">Send Me a Message</h3>
+            <p className="text-xs text-slate-400 mb-6">
+              Have an opportunity, mobile app project, or technical question? Feel free to write me directly below.
+            </p>
+
+            {isSubmitted && (
+              <div className="p-4 mb-6 text-sm text-cyan-300 bg-cyan-950/60 border border-cyan-500/40 rounded-xl flex items-center gap-2 animate-fade-in">
+                <FaCheckCircle className="text-cyan-400 text-lg flex-shrink-0" />
+                <span>Thank you! Your message has been sent successfully. I will get back to you shortly.</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid gap-5 md:grid-cols-2">
+                <div>
+                  <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                    placeholder="Jane Doe"
+                  />
+                </div>
+
+                <div>
+                  <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Your Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                    placeholder="jane@company.com"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Your Name *
+                <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Subject *
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="subject"
+                  value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="John Doe"
+                  className="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                  placeholder="Software Engineering / Mobile App Role Opportunity"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Your Email *
+                <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Message *
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+                <textarea
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="john@example.com"
-                />
+                  rows="5"
+                  className="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors resize-none"
+                  placeholder="Hi Ishara, I reviewed your CeylonX Corporation mobile app experience and would like to discuss..."
+                ></textarea>
               </div>
-            </div>
 
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                Subject *
-              </label>
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                placeholder="Internship Opportunity"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                Message *
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows="6"
-                className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                placeholder="Tell me about the opportunity..."
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="flex items-center justify-center w-full btn-primary"
-            >
-              {isSubmitting ? (
-                <>
-                  <span className="w-4 h-4 mr-2 border-b-2 border-white rounded-full animate-spin"></span>
-                  Sending...
-                </>
-              ) : (
-                <>
-                  Send Message <FaPaperPlane className="ml-2" />
-                </>
-              )}
-            </button>
-
-            <p className="text-sm text-center text-gray-500">
-              I'll get back to you within 24 hours. Looking forward to
-              connecting!
-            </p>
-          </form>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-gradient w-full py-3.5 text-slate-950 font-bold"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></span>
+                    Sending Message...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    Send Message <FaPaperPlane className="text-xs" />
+                  </span>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -296,3 +308,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaReact,
   FaNodeJs,
   FaDatabase,
   FaCloud,
   FaGitAlt,
-  FaFigma,
   FaPython,
   FaJava,
+  FaMobileAlt,
+  FaLayerGroup,
 } from "react-icons/fa";
 import {
+  SiFlutter,
+  SiDart,
   SiJavascript,
   SiTypescript,
   SiTailwindcss,
@@ -19,221 +22,274 @@ import {
   SiDocker,
   SiKalilinux,
   SiWireshark,
-  SiArduino,
+  SiAndroid,
+  SiPostgresql,
 } from "react-icons/si";
 
 const Skills = () => {
+  const [activeCategory, setActiveCategory] = useState("all");
+
   const skills = [
     {
+      icon: <SiFlutter />,
+      name: "Flutter",
+      level: 92,
+      category: "mobile",
+      color: "text-cyan-400",
+      description: "Cross-platform mobile apps, custom UI widgets, native channels",
+    },
+    {
+      icon: <SiDart />,
+      name: "Dart",
+      level: 90,
+      category: "mobile",
+      color: "text-blue-400",
+      description: "Object-oriented programming, streams, async/await concurrency",
+    },
+    {
+      icon: <SiFirebase />,
+      name: "Firebase",
+      level: 85,
+      category: "mobile",
+      color: "text-amber-400",
+      description: "Firestore, Cloud Messaging, Auth, Analytics, Remote Config",
+    },
+    {
+      icon: <FaMobileAlt />,
+      name: "Mobile State Management",
+      level: 88,
+      category: "mobile",
+      color: "text-teal-400",
+      description: "Bloc pattern, Provider, Riverpod, reactive UI architecture",
+    },
+    {
       icon: <FaReact />,
-      name: "React",
-      level: 80,
+      name: "React.js",
+      level: 88,
       category: "frontend",
-      color: "text-blue-500",
+      color: "text-cyan-400",
+      description: "Hooks, SPA routing, state management, modern component design",
     },
     {
       icon: <SiJavascript />,
-      name: "JavaScript",
+      name: "JavaScript (ES6+)",
       level: 90,
       category: "frontend",
-      color: "text-yellow-500",
+      color: "text-yellow-400",
+      description: "DOM manipulation, promises, async flows, functional programming",
     },
     {
       icon: <SiTypescript />,
       name: "TypeScript",
-      level: 60,
+      level: 78,
       category: "frontend",
-      color: "text-blue-600",
+      color: "text-blue-500",
+      description: "Strong typing, interface definitions, generics",
     },
     {
       icon: <SiTailwindcss />,
       name: "Tailwind CSS",
-      level: 90,
+      level: 92,
       category: "frontend",
-      color: "text-teal-500",
+      color: "text-teal-400",
+      description: "Responsive layouts, dark themes, custom CSS animations",
     },
     {
       icon: <FaNodeJs />,
       name: "Node.js",
-      level: 80,
+      level: 82,
       category: "backend",
-      color: "text-green-600",
+      color: "text-emerald-400",
+      description: "Asynchronous backend logic, RESTful microservices",
     },
     {
       icon: <SiExpress />,
       name: "Express.js",
-      level: 75,
+      level: 80,
       category: "backend",
-      color: "text-gray-600",
+      color: "text-slate-300",
+      description: "API routing, JWT authentication, middleware integration",
     },
     {
       icon: <SiMongodb />,
       name: "MongoDB",
-      level: 80,
+      level: 82,
       category: "database",
-      color: "text-green-500",
+      color: "text-emerald-500",
+      description: "NoSQL document schemas, aggregation pipelines, Mongoose",
     },
     {
-      icon: <FaDatabase />,
-      name: "MySQL",
-      level: 75,
+      icon: <SiPostgresql />,
+      name: "PostgreSQL / MySQL",
+      level: 80,
       category: "database",
-      color: "text-blue-700",
+      color: "text-blue-400",
+      description: "Relational schema design, SQL queries, indexing, transactions",
     },
     {
       icon: <FaPython />,
       name: "Python",
-      level: 70,
-      category: "language",
-      color: "text-blue-400",
+      level: 75,
+      category: "languages",
+      color: "text-blue-300",
+      description: "Data processing, Flask API endpoints, automation scripts",
     },
     {
       icon: <FaJava />,
       name: "Java",
-      level: 65,
-      category: "language",
-      color: "text-red-500",
+      level: 70,
+      category: "languages",
+      color: "text-red-400",
+      description: "OOP principles, enterprise software development",
     },
     {
       icon: <FaGitAlt />,
-      name: "Git",
-      level: 85,
+      name: "Git & GitHub",
+      level: 90,
       category: "tools",
-      color: "text-orange-600",
+      color: "text-orange-400",
+      description: "Branching strategies, pull requests, version control",
     },
     {
       icon: <SiDocker />,
-      name: "Docker",
-      level: 60,
+      name: "Docker Basics",
+      level: 65,
       category: "tools",
-      color: "text-blue-400",
+      color: "text-cyan-500",
+      description: "Containerization, Dockerfiles, dev environment setups",
     },
     {
       icon: <SiKalilinux />,
-      name: "Penetration Testing",
-      level: 50,
+      name: "Cybersecurity (CC)",
+      level: 75,
       category: "cybersecurity",
-      color: "text-red-600",
-    },
-    {
-      icon: <SiWireshark />,
-      name: "Network Security",
-      level: 55,
-      category: "cybersecurity",
-      color: "text-blue-500",
-    },
-    {
-      icon: <SiArduino />,
-      name: "Arduino",
-      level: 70,
-      category: "hardware",
-      color: "text-blue-500",
+      color: "text-red-500",
+      description: "Network security, penetration testing basics, ISC² CC certified",
     },
   ];
 
   const categories = [
-    { name: "Frontend", color: "bg-blue-100 text-blue-800", count: 4 },
-    { name: "Backend", color: "bg-green-100 text-green-800", count: 3 },
-    { name: "Database", color: "bg-purple-100 text-purple-800", count: 2 },
-    { name: "Languages", color: "bg-red-100 text-red-800", count: 2 },
-    { name: "Tools", color: "bg-orange-100 text-orange-800", count: 3 },
+    { id: "all", label: "All Skills" },
+    { id: "mobile", label: "Mobile Development" },
+    { id: "frontend", label: "Frontend Web" },
+    { id: "backend", label: "Backend & APIs" },
+    { id: "database", label: "Databases" },
+    { id: "languages", label: "Languages" },
+    { id: "tools", label: "Tools & Cyber" },
   ];
 
+  const filteredSkills =
+    activeCategory === "all"
+      ? skills
+      : skills.filter((s) => s.category === activeCategory);
+
   return (
-    <section id="skills" className="section-container">
-      <div className="mb-12 text-center">
-        <h2 className="section-title">Technical Skills</h2>
-        <p className="section-subtitle">
-          Technologies and tools I've worked with to build modern web
-          applications
-        </p>
-      </div>
-
-      {/* Categories */}
-      <div className="flex flex-wrap justify-center gap-4 mb-12">
-        {categories.map((cat, index) => (
-          <div
-            key={index}
-            className={`px-4 py-2 rounded-full ${cat.color} font-medium flex items-center`}
-          >
-            {cat.name}
-            <span className="ml-2 bg-white/50 px-2 py-0.5 rounded-full text-xs">
-              {cat.count}
-            </span>
+    <section id="skills" className="relative py-24 bg-slate-900/60 border-y border-slate-800/80">
+      <div className="section-container">
+        {/* Section Header */}
+        <div className="mb-16 text-center">
+          <div className="flex justify-center mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium">
+              <FaLayerGroup className="text-xs" />
+              <span>Tech Arsenal</span>
+            </div>
           </div>
-        ))}
-      </div>
+          <h2 className="section-title">
+            Technical <span className="text-gradient">Skills</span>
+          </h2>
+          <p className="section-subtitle">
+            Battle-tested technologies and mobile software engineering skills honed through corporate internship and project development.
+          </p>
+        </div>
 
-      {/* Skills Grid */}
-      <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {skills.map((skill, index) => (
-          <div
-            key={index}
-            className="p-6 text-center transition-all duration-300 transform card group hover:shadow-xl hover:-translate-y-2"
-            style={{ animationDelay: `${index * 50}ms` }}
-          >
-            <div
-              className={`text-4xl mb-4 ${skill.color} group-hover:scale-110 transition-transform duration-300`}
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all duration-200 ${
+                activeCategory === cat.id
+                  ? "bg-cyan-500 text-slate-950 shadow-glow-cyan"
+                  : "bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-700 hover:text-white"
+              }`}
             >
-              {skill.icon}
-            </div>
-            <h3 className="mb-3 text-lg font-bold">{skill.name}</h3>
-
-            {/* Progress Bar */}
-            <div className="relative pt-1">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-xs font-semibold text-gray-600">
-                  Proficiency
-                </div>
-                <div className="text-xs font-bold text-primary">
-                  {skill.level}%
-                </div>
-              </div>
-              <div className="flex h-2 mb-4 overflow-hidden text-xs bg-gray-200 rounded">
-                <div
-                  style={{ width: `${skill.level}%` }}
-                  className="flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap bg-gradient-to-r from-primary to-accent"
-                ></div>
-              </div>
-            </div>
-
-            <span className="text-xs badge badge-primary">
-              {skill.category}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Additional Info */}
-      <div className="grid gap-8 mt-16 md:grid-cols-3">
-        <div className="p-8 text-center card">
-          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full">
-            <FaCloud className="text-2xl text-blue-600" />
-          </div>
-          <h3 className="mb-3 text-xl font-bold">Cloud Platforms</h3>
-          <p className="text-gray-600">
-            Experience with AWS, Vercel, and Firebase for deploying applications
-          </p>
+              {cat.label}
+            </button>
+          ))}
         </div>
 
-        <div className="p-8 text-center card">
-          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-green-100 rounded-full">
-            <FaDatabase className="text-2xl text-green-600" />
-          </div>
-          <h3 className="mb-3 text-xl font-bold">Database Design</h3>
-          <p className="text-gray-600">
-            Proficient in both SQL and NoSQL database design and optimization
-          </p>
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredSkills.map((skill, index) => (
+            <div
+              key={index}
+              className="glass-card p-6 flex flex-col justify-between hover:border-cyan-500/50 hover:shadow-glow-cyan transition-all duration-300 group"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div
+                    className={`text-4xl ${skill.color} p-2 rounded-xl bg-slate-950 border border-slate-800 group-hover:scale-110 transition-transform`}
+                  >
+                    {skill.icon}
+                  </div>
+                  <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded-md border border-cyan-800/50">
+                    {skill.level}%
+                  </span>
+                </div>
+
+                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                  {skill.name}
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                  {skill.description}
+                </p>
+              </div>
+
+              {/* Progress Bar */}
+              <div>
+                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 rounded-full transition-all duration-500"
+                    style={{ width: `${skill.level}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="p-8 text-center card">
-          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-purple-100 rounded-full">
-            <FaGitAlt className="text-2xl text-purple-600" />
+        {/* Feature Highlights Grid */}
+        <div className="grid gap-6 mt-16 md:grid-cols-3">
+          <div className="glass-card p-6 text-center border-cyan-500/20">
+            <div className="flex items-center justify-center w-14 h-14 mx-auto mb-4 bg-cyan-500/10 text-cyan-400 rounded-2xl text-2xl border border-cyan-500/30">
+              <FaMobileAlt />
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Mobile First Development</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Specialized in Flutter cross-platform architecture, reactive state management, and offline-first mobile sync.
+            </p>
           </div>
-          <h3 className="mb-3 text-xl font-bold">Version Control</h3>
-          <p className="text-gray-600">
-            Expertise in Git workflows, CI/CD pipelines, and team collaboration
-          </p>
+
+          <div className="glass-card p-6 text-center border-teal-500/20">
+            <div className="flex items-center justify-center w-14 h-14 mx-auto mb-4 bg-teal-500/10 text-teal-400 rounded-2xl text-2xl border border-teal-500/30">
+              <FaCloud />
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Cloud & RESTful APIs</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Designing scalable REST APIs, microservices integration, Firebase backend services, and cloud deployment.
+            </p>
+          </div>
+
+          <div className="glass-card p-6 text-center border-purple-500/20">
+            <div className="flex items-center justify-center w-14 h-14 mx-auto mb-4 bg-purple-500/10 text-purple-400 rounded-2xl text-2xl border border-purple-500/30">
+              <FaGitAlt />
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Agile & Clean Architecture</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Practicing Clean Code, SOLID software principles, Git flow collaboration, and test-driven mobile development.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -241,3 +297,4 @@ const Skills = () => {
 };
 
 export default Skills;
+

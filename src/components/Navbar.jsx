@@ -7,6 +7,7 @@ import {
   FaEnvelope,
   FaHome,
   FaUser,
+  FaBriefcase,
   FaCode,
   FaProjectDiagram,
   FaPhone,
@@ -18,7 +19,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -26,6 +27,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", icon: <FaHome />, href: "#home" },
+    { name: "Experience", icon: <FaBriefcase />, href: "#experience" },
     { name: "About", icon: <FaUser />, href: "#about" },
     { name: "Skills", icon: <FaCode />, href: "#skills" },
     { name: "Projects", icon: <FaProjectDiagram />, href: "#projects" },
@@ -46,98 +48,122 @@ const Navbar = () => {
     {
       icon: <FaEnvelope />,
       href: "mailto:isharawanninayaka26@gmail.com",
-      title: "Email",
+      label: "Email",
     },
   ];
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl py-3"
+          : "bg-transparent py-5"
       }`}
     >
-      <div className="container px-4 mx-auto sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#home" className="flex items-center space-x-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-primary to-accent">
-              <img src="/logo.png"></img>
+      <div className="container max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Brand Logo */}
+          <a href="#home" className="flex items-center gap-3 group">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-indigo-500 p-0.5 shadow-glow-cyan transition-transform group-hover:scale-105">
+              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                <span className="font-mono text-cyan-400 font-extrabold text-lg">IW</span>
+              </div>
             </div>
-            <span className="text-xl font-bold text-dark">Portfolio</span>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
+                Ishara <span className="text-cyan-400">W.</span>
+              </span>
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                Software Engineer
+              </span>
+            </div>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="items-center hidden space-x-8 md:flex">
+          {/* Desktop Navigation Links */}
+          <div className="items-center hidden space-x-1 lg:flex bg-slate-900/60 p-1.5 rounded-full border border-slate-800/80 backdrop-blur-md">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="flex items-center space-x-2 text-gray-600 transition-colors duration-300 hover:text-primary group"
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-slate-300 rounded-full transition-all duration-200 hover:text-white hover:bg-slate-800/80 hover:shadow-sm"
               >
-                <span className="transition-transform group-hover:scale-110">
-                  {item.icon}
-                </span>
-                <span className="font-medium">{item.name}</span>
+                <span className="text-cyan-400 text-xs">{item.icon}</span>
+                <span>{item.name}</span>
               </a>
             ))}
           </div>
 
-          {/* Social Links */}
-          <div className="items-center hidden space-x-4 md:flex">
+          {/* Right Action Icons & Socials */}
+          <div className="items-center hidden space-x-3 lg:flex">
             {socialLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 text-gray-600 transition-all duration-300 transform bg-gray-100 rounded-full hover:bg-primary hover:text-white hover:scale-110"
+                className="flex items-center justify-center w-9 h-9 text-slate-300 transition-all duration-300 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 hover:text-cyan-400 hover:scale-110"
                 aria-label={link.label}
               >
                 {link.icon}
               </a>
             ))}
+            <a
+              href="#contact"
+              className="px-4 py-2 text-xs font-semibold text-slate-950 rounded-lg bg-gradient-to-r from-cyan-400 to-teal-400 hover:opacity-90 transition-opacity shadow-glow-cyan"
+            >
+              Hire Me
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-center w-10 h-10 text-gray-600 transition-colors md:hidden hover:text-primary"
+            className="flex items-center justify-center w-10 h-10 text-slate-300 rounded-xl bg-slate-900 border border-slate-800 lg:hidden hover:text-cyan-400"
             aria-label="Toggle menu"
           >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation Drawer */}
         {isOpen && (
-          <div className="py-4 mt-2 bg-white shadow-2xl md:hidden rounded-xl animate-fade-in">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="flex items-center px-6 py-3 space-x-3 text-gray-600 transition-colors hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsOpen(false)}
-              >
-                <span className="text-lg">{item.icon}</span>
-                <span className="font-medium">{item.name}</span>
-              </a>
-            ))}
+          <div className="p-4 mt-3 bg-slate-900/95 backdrop-blur-xl border border-slate-800 lg:hidden rounded-2xl shadow-2xl animate-slide-up">
+            <div className="flex flex-col space-y-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center px-4 py-3 space-x-3 text-slate-300 rounded-xl transition-colors hover:text-white hover:bg-slate-800/80"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="text-cyan-400">{item.icon}</span>
+                  <span className="font-medium text-sm">{item.name}</span>
+                </a>
+              ))}
+            </div>
 
-            <div className="px-6 pt-4 mt-4 border-t border-gray-100">
-              <div className="flex justify-center space-x-6">
+            <div className="px-2 pt-4 mt-3 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="flex space-x-3">
                 {socialLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xl text-gray-600 transition-colors hover:text-primary"
+                    className="p-2 text-slate-400 transition-colors rounded-lg bg-slate-800 hover:text-cyan-400"
                     aria-label={link.label}
                   >
                     {link.icon}
                   </a>
                 ))}
               </div>
+              <a
+                href="#contact"
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-2 text-xs font-semibold text-slate-950 rounded-lg bg-cyan-400 font-sans"
+              >
+                Let's Connect
+              </a>
             </div>
           </div>
         )}
@@ -147,3 +173,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

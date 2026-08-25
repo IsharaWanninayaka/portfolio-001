@@ -5,74 +5,74 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
   
   body {
-    @apply antialiased bg-light text-dark;
+    @apply antialiased bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300;
   }
-  
-  ::selection {
-    @apply bg-primary/30 text-dark;
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply px-6 py-3 font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg bg-primary hover:bg-secondary hover:scale-105 active:scale-95 hover:shadow-xl;
+  /* Glassmorphism Cards */
+  .glass-card {
+    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl transition-all duration-300 hover:border-cyan-500/50 hover:shadow-glow-cyan;
+  }
+
+  .glass-card-light {
+    @apply bg-white/80 backdrop-blur-xl border border-slate-200/90 rounded-2xl transition-all duration-300 hover:border-cyan-500/50 hover:shadow-xl;
+  }
+
+  /* Interactive Buttons */
+  .btn-gradient {
+    @apply px-6 py-3 font-semibold text-slate-950 transition-all duration-300 rounded-xl bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 hover:opacity-95 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2;
   }
   
-  .btn-secondary {
-    @apply px-6 py-3 font-semibold transition-all duration-300 border-2 rounded-lg border-primary text-primary hover:bg-primary hover:text-white;
+  .btn-outline {
+    @apply px-6 py-3 font-semibold transition-all duration-300 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 hover:border-cyan-400 text-slate-200 hover:text-white flex items-center justify-center gap-2;
   }
   
   .section-container {
-    @apply container px-4 py-12 mx-auto sm:px-6 lg:px-8 md:py-20;
+    @apply container max-w-7xl px-4 py-16 mx-auto sm:px-6 lg:px-8 md:py-24;
   }
   
   .section-title {
-    @apply relative inline-block mb-4 text-3xl font-bold text-center md:text-4xl lg:text-5xl;
-  }
-  
-  .section-title::after {
-    content: '';
-    @apply absolute w-24 h-1 transform -translate-x-1/2 rounded-full left-1/2 -bottom-3 bg-primary;
+    @apply relative block text-center text-3xl font-extrabold tracking-tight md:text-5xl lg:text-6xl text-white;
   }
   
   .section-subtitle {
-    @apply max-w-2xl mx-auto mb-12 text-lg text-center text-gray-600;
-  }
-  
-  .card {
-    @apply transition-all duration-300 transform bg-white shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1;
-  }
-  
-  .badge {
-    @apply inline-block px-3 py-1 text-sm font-semibold rounded-full;
-  }
-  
-  .badge-primary {
-    @apply bg-primary/10 text-primary;
-  }
-  
-  .badge-secondary {
-    @apply bg-accent/10 text-accent;
+    @apply max-w-3xl mx-auto mt-4 text-base md:text-lg text-slate-400 font-normal text-center;
   }
 }
 
 @layer utilities {
-  .animate-delay-100 {
-    animation-delay: 100ms;
-  }
-  
-  .animate-delay-200 {
-    animation-delay: 200ms;
-  }
-  
-  .animate-delay-300 {
-    animation-delay: 300ms;
-  }
-  
   .text-gradient {
-    @apply text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text;
+    @apply text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text;
   }
-}
+
+  .text-gradient-purple {
+    @apply text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text;
+  }
+
+  .mesh-bg {
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+  }
+}
